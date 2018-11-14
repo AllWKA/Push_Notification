@@ -12,8 +12,8 @@ consign({
 })
 .include('libs/config.js')
 .then('db.js')
-.then('./libs/middleware.js')
+.then('libs/middleware.js')
 .then('routes')
-.then('./libs/boot.js')
+.then('libs/boot.js')
 .into(app);
 

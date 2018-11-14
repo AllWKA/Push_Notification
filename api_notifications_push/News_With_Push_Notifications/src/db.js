@@ -18,27 +18,23 @@ module.exports = app => {
             config.password,
             config.params
         );
-        
+
         db = {
             sequelize,
             Sequelize,
             models: {}
         };
 
-        const dir = path.join(__dirname,'models');
+        const dir = path.join(__dirname, 'models');
 
-        fs.readdirSync(dir).forEach(filename =>{
+        fs.readdirSync(dir).forEach(filename => {
 
             console.log("----------------Adding model: ", filename);
-            const modelDir = path.join(dir,filename);
-            console.log("modelDir: ", modelDir);
+            const modelDir = path.join(dir, filename);
             const model = sequelize.import(modelDir);
-            console.log("model: ", model);
             db.models[model.name] = model;
-            console.log("hola:///////////////////",db.models,"///////////////////");
         });
-
-        console.log("/*",db.models,"///////////////////");
+        console.log("----> ", db.models);
 
         // Object.keys(db.models).forEach(key =>{
         //     console.log("****************assosiating: ", key);
@@ -46,7 +42,7 @@ module.exports = app => {
         // });
 
     }
-    
+
 
     return db;
 
