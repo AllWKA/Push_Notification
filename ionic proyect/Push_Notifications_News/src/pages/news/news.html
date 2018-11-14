@@ -1,0 +1,67 @@
+<ion-header class="header center">
+  <ion-navbar>
+    <ion-title>
+      <ion-icon name="ios-leaf-outline" class="toolbarText">News</ion-icon>
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="Parts" color="light">
+      <ion-segment-button value="allNew" class="tabs">
+        All News
+      </ion-segment-button>
+      <ion-segment-button value="alerts" class="tabs">
+        Alerts
+      </ion-segment-button>
+      <ion-segment-button value="events" class="tabs">
+        Events
+      </ion-segment-button>
+      <ion-segment-button value="others" class="tabs">
+        Others
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  Selecciona una categoria.
+  <div [ngSwitch]="Parts">
+
+    <ion-list *ngSwitchCase="'allNew'">
+      <ion-item>
+        <ion-card>
+          <img src="data:image/jpeg;base64,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" />
+          <ion-card-content>
+            <ion-card-title>
+              Nine Inch Nails Live
+            </ion-card-title>
+            <p>
+              The most popular industrial group ever, and largely
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'alerts'">
+      <ion-item>
+        <p>hola</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'events'">
+      <ion-item>
+        <p>hola</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'others'">
+      <ion-item>
+        <p>hola</p>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+</ion-content>
