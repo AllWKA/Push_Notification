@@ -19,6 +19,10 @@ module.exports = (sequelize,DataType) => {
         }
     );
 
+    App.associate = (models) => {
+        App.belongsToMany(models.User);
+    };
+
     return App;
 
 };

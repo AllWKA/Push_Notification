@@ -36,10 +36,10 @@ module.exports = app => {
         });
         console.log("----> ", db.models);
 
-        // Object.keys(db.models).forEach(key =>{
-        //     console.log("****************assosiating: ", key);
-        //     db.models[key].associate(db.models);
-        // });
+        Object.keys(db.models).forEach(key =>{
+            console.log("****************assosiating: ", key);
+            db.models[key].associate(db.models);
+        });
 
     }
 

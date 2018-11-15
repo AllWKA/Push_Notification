@@ -1,12 +1,12 @@
 module.exports = app => {
 
-    const App = app.db.models.app;
+    const User = app.db.models.user;
 
 
 
-    app.get('/apps', (req, res) => {
+    app.get('/users', (req, res) => {
 
-        App.findAll({})
+        User.findAll({})
             .then(result => res.json(result))
             .catch(error => {
 
@@ -15,13 +15,16 @@ module.exports = app => {
 
     });
 
-    app.post('/app', (req, res) => {
+    app.post('/user', (req, res) => {
 
         console.log(req.body.name);
+        console.log(req.body.email);
         const name = req.body.name;
-        App.create({
+        const email = req.body.email;
+        User.create({
 
-            name: name
+            name: name,
+            email:email
         })
             .then(newOwner => {
 
@@ -30,9 +33,9 @@ module.exports = app => {
 
     });
 
-    app.get('/app/:id', (req, res) => {
+    app.get('/user/:id', (req, res) => {
         const id = req.params.id;
-        App.find({
+        User.find({
 
             where: { id: id }
         })
@@ -42,14 +45,18 @@ module.exports = app => {
             });
     });
 
-    app.put("/app/:id", (req, res, next) => {
+    app.put("/user/:id", (req, res, next) => {
 
         const id = req.params.id;
         const name = req.body.name;
+        const email = req.body.email;
+        const status = req.body.status;
 
-        App.update({
+        User.update({
 
-            name: name
+            name: name,
+            email:email,
+            status:status
         }, {
 
                 where: { id: id }
@@ -61,10 +68,10 @@ module.exports = app => {
             .catch(next)
     });
 
-    app.delete('/app/:id', (req, res) => {
+    app.delete('/user/:id', (req, res) => {
 
         const id = req.params.id;
-        App.destroy({
+        User.destroy({
 
           where: { id: id }
         })
