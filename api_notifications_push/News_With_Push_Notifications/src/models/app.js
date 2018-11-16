@@ -20,7 +20,7 @@ module.exports = (sequelize,DataType) => {
     );
 
     App.associate = (models) => {
-        App.belongsToMany(models.User);
+        App.belongsToMany(models.user,{through: 'app_has_users'});
     };
 
     return App;

@@ -6,8 +6,20 @@ module.exports = app => {
 
     app.get('/users', (req, res) => {
 
-        User.findAll({})
-            .then(result => res.json(result))
+        User.findAll({
+            include: [{
+
+                model: app.db.models.app,
+                as: 'userApps',
+                attributes: ['id', 'name'],
+                through: { attributes: ['userId','appId'] }
+            }]
+        })
+            .then(result => {
+
+                res.json(result);
+
+            })
             .catch(error => {
 
                 res.status(412).json({ msg: error.message })
@@ -19,12 +31,14 @@ module.exports = app => {
 
         console.log(req.body.name);
         console.log(req.body.email);
+
         const name = req.body.name;
         const email = req.body.email;
+        
         User.create({
 
             name: name,
-            email:email
+            email: email
         })
             .then(newOwner => {
 
@@ -34,7 +48,9 @@ module.exports = app => {
     });
 
     app.get('/user/:id', (req, res) => {
+
         const id = req.params.id;
+        
         User.find({
 
             where: { id: id }
@@ -55,17 +71,20 @@ module.exports = app => {
         User.update({
 
             name: name,
-            email:email,
-            status:status
+            email: email,
+            status: status
         }, {
 
                 where: { id: id }
             })
-            .then(function (rowsUpdated) {
+            .then(rowsUpdated => {
 
                 res.json(rowsUpdated)
             })
-            .catch(next)
+            .catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });
     });
 
     app.delete('/user/:id', (req, res) => {
@@ -73,12 +92,15 @@ module.exports = app => {
         const id = req.params.id;
         User.destroy({
 
-          where: { id: id }
+            where: { id: id }
         })
-          .then(deletedOwner => {
-              
-            res.json(deletedOwner);
-          });
-      });
+            .then(deletedOwner => {
+
+                res.json(deletedOwner);
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });
+    });
 
 }

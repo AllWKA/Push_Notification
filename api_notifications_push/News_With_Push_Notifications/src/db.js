@@ -29,15 +29,15 @@ module.exports = app => {
 
         fs.readdirSync(dir).forEach(filename => {
 
-            console.log("----------------Adding model: ", filename);
+            console.log("---------------->Adding model: ", filename);
             const modelDir = path.join(dir, filename);
             const model = sequelize.import(modelDir);
             db.models[model.name] = model;
         });
-        console.log("----> ", db.models);
+        console.log("All Models charged ----> ", db.models);
 
         Object.keys(db.models).forEach(key =>{
-            console.log("****************assosiating: ", key);
+            console.log("****************assosiating: ", db.models[key].name);
             db.models[key].associate(db.models);
         });
 

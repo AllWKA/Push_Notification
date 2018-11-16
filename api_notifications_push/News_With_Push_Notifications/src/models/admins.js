@@ -1,19 +1,16 @@
 module.exports = (sequelize,DataType) => {
 
-    const User = sequelize.define(
-        'user',
+    const App = sequelize.define(
+        'admins',
         {
-            name: {
+            user: {
                 type: DataType.STRING,
                 allowNull: false,
                 validate:{
                     notEmpty: true
                 }
             },
-            status:{
-                type: DataType.ENUM('active', 'inactive')
-            },
-            email: {
+            pwd: {
                 type: DataType.STRING,
                 allowNull: false,
                 validate:{
@@ -29,14 +26,12 @@ module.exports = (sequelize,DataType) => {
         }
     );
 
-    User.associate = (models) => {
-        User.belongsToMany(models.app,{
-            through: 'app_has_users',
-            as: 'userApps',
-            foreignKey: 'userId'
-        });
+    App.associate = (models) => {
+        //App.belongsToMany(models.user,{through: 'app_has_users'});
+        console.log("jeje no tengo(by admins no mas oralesito)");
+        
     };
 
-    return User;
+    return App;
 
 };
