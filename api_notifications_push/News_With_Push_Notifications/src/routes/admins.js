@@ -3,9 +3,13 @@ module.exports = app => {
     app.get('/admins', (req, res) => {
 
         Admins.findAll({
-            through: {
-                attributes: ['user_id', 'app_id'],
-            }
+            include: [{
+
+                model: app.db.models.app,
+                as: 'adminApps',
+                attributes: ['id', 'name'],
+                through: { attributes: ['userId','appId'] }
+            }]
         })
             .then(result => {
 

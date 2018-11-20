@@ -4,17 +4,16 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-
+import {NewsPage} from '../pages/news/news';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import {NotificationsPage} from '../pages/notifications/notifications';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    NotificationsPage
+    NewsPage
   ],
   imports: [
     BrowserModule,
@@ -24,7 +23,7 @@ import {NotificationsPage} from '../pages/notifications/notifications';
   entryComponents: [
     MyApp,
     HomePage,
-    NotificationsPage
+    NewsPage
   ],
   providers: [
     StatusBar,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { NotificationsPage } from '../notifications/notifications';
+import { NewsPage } from '../news/news';
 
 @Component({
   selector: 'page-home',
@@ -20,8 +20,6 @@ export class HomePage {
 
     //TODO: verificar
     console.log("Entro Normal");
-    //console.log(this.http.get());
-    
 
     if (this.checkForm() == true) {
 
@@ -45,7 +43,7 @@ export class HomePage {
     console.log("Cambio Página: ", url);
     switch (url) {
       case 0:
-        this.navCtrl.push(NotificationsPage);
+        this.navCtrl.push(NewsPage);
         break;
       case 1:
         console.log("entré en create");
