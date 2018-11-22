@@ -27,6 +27,7 @@ module.exports = (sequelize,DataType) => {
     );
 
     App.associate = (models) => {
+        //TODO: many to many a app
         //App.belongsToMany(models.user,{through: 'app_has_users'});
         console.log("jeje no tengo(by admins no mas oralesito)");
         
