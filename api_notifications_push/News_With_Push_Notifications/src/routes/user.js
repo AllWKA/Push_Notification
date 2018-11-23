@@ -6,15 +6,10 @@ module.exports = app => {
 
     app.get('/users', (req, res) => {
 
-        User.findAll({
+        User.findAll({		
             include: [{
-
-                model: app.db.models.app,
-                as: 'userApps',
-                attributes: ['id', 'name'],
-                through: { attributes: ['userId','appId'] }
-            }]
-        })
+                model: app.db.models.app
+		}]})
             .then(result => {
 
                 res.json(result);

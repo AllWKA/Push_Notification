@@ -16,30 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admins`
+-- Table structure for table `app_has_owner`
 --
 
-DROP TABLE IF EXISTS `admins`;
+DROP TABLE IF EXISTS `app_has_owner`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `admins` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(45) NOT NULL,
-  `pwd` varchar(45) NOT NULL,
-  `createdAt` date DEFAULT NULL,
-  `updatedAt` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `app_has_owner` (
+  `appId` int(11) NOT NULL,
+  `ownerId` int(11) NOT NULL,
+  PRIMARY KEY (`appId`,`ownerId`),
+  KEY `fk2_app_owener_idx` (`ownerId`),
+  CONSTRAINT `fk1_app_owner` FOREIGN KEY (`appId`) REFERENCES `apps` (`id`),
+  CONSTRAINT `fk2_app_owener` FOREIGN KEY (`ownerId`) REFERENCES `productowners` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admins`
+-- Dumping data for table `app_has_owner`
 --
 
-LOCK TABLES `admins` WRITE;
-/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'root','Admin123','2018-11-16','2018-11-16'),(2,'root','Admin123','2018-11-19','2018-11-19');
-/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+LOCK TABLES `app_has_owner` WRITE;
+/*!40000 ALTER TABLE `app_has_owner` DISABLE KEYS */;
+/*!40000 ALTER TABLE `app_has_owner` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 19:03:13
+-- Dump completed on 2018-11-22 19:03:14
