@@ -8,6 +8,7 @@ module.exports = app => {
 
         User.findAll({		
             include: [{
+                model: app.db.models.app
 		}]})
             .then(result => {
 

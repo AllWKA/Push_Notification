@@ -6,7 +6,10 @@ module.exports = app => {
 
     app.get('/apps', (req, res) => {
 
-        App.findAll({})
+        App.findAll({		
+            include: [{
+                model: app.db.models.user
+		}]})
             .then(result => res.json(result))
             .catch(error => {
 

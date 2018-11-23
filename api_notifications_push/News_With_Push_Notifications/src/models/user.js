@@ -30,7 +30,7 @@ module.exports = (sequelize,DataType) => {
     );
 
     User.associate = (models) => {
-        User.hasOne(models.app);
+        User.belongsTo(models.app);
     };
 
     return User;
