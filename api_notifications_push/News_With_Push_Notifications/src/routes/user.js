@@ -6,10 +6,11 @@ module.exports = app => {
 
     app.get('/users', (req, res) => {
 
-        User.findAll({		
+        User.findAll({
             include: [{
                 model: app.db.models.app
-		}]})
+            }]
+        })
             .then(result => {
 
                 res.json(result);
@@ -29,23 +30,28 @@ module.exports = app => {
 
         const name = req.body.name;
         const email = req.body.email;
-        
+        const appId = req.body.appId;
+
         User.create({
 
             name: name,
-            email: email
+            email: email,
+            appId: appId
         })
             .then(newOwner => {
 
                 res.json(newOwner);
-            })
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });
 
     });
 
     app.get('/user/:id', (req, res) => {
 
         const id = req.params.id;
-        
+
         User.find({
 
             where: { id: id }
@@ -62,11 +68,13 @@ module.exports = app => {
         const name = req.body.name;
         const email = req.body.email;
         const status = req.body.status;
+        const appId = req.body.appId;
 
         User.update({
 
             name: name,
             email: email,
+            appId: appId,
             status: status
         }, {
 
