@@ -1,0 +1,40 @@
+module.exports = (sequelize, DataType) => {
+
+    const Owner = sequelize.define(
+        'productowners',
+        {
+            name: {
+                type: DataType.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            surname1: {
+                type: DataType.STRING,
+                allowNull: true,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            surname2: {
+                type: DataType.STRING,
+                allowNull: true,
+                validate: {
+                    notEmpty: true
+                }
+            },
+            postCode: {
+                type: DataType.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: true
+                }
+            }
+        });
+    Owner.associate = (models) => {
+        Owner.belongsToMany(models.app, {through: 'app_has_owners'});
+    };
+
+    return Owner;
+};

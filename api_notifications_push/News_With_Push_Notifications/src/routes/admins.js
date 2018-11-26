@@ -3,12 +3,11 @@ module.exports = app => {
     app.get('/admins', (req, res) => {
 
         Admins.findAll({
+            
             include: [{
-
                 model: app.db.models.app,
-                as: 'adminApps',
-                attributes: ['id', 'name'],
-                through: { attributes: ['userId','appId'] }
+                attributes: ['id', 'name']
+                
             }]
         })
             .then(result => {
@@ -26,11 +25,13 @@ module.exports = app => {
 
         const user = req.body.user;
         const pwd = req.body.pwd;
+        const apps = req.body.apps;
 
         Admins.create({
 
             user: user,
-            pwd: pwd
+            pwd: pwd,
+            apps: apps
         })
             .then(newAdmin => {
 

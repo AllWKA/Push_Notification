@@ -1,6 +1,6 @@
 module.exports = (sequelize,DataType) => {
 
-    const App = sequelize.define(
+    const Admins = sequelize.define(
         'admins',
         {
             user: {
@@ -26,13 +26,12 @@ module.exports = (sequelize,DataType) => {
         }
     );
 
-    App.associate = (models) => {
+    Admins.associate = (models) => {
         //TODO: many to many a app
-        //App.belongsToMany(models.user,{through: 'app_has_users'});
-        console.log("jeje no tengo(by admins no mas oralesito)");
+        Admins.belongsToMany(models.app, {through: 'app_has_admins'});
         
     };
 
-    return App;
+    return Admins;
 
 };
