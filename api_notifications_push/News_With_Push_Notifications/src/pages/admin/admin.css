@@ -1,7 +1,11 @@
+body{
+    background-color: red;
+}
 .nav-dark{
     background-color: black;
 }
 
 .fixedH6{
+    size: 150%;
     color: white;
 }

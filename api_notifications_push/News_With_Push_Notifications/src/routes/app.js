@@ -31,6 +31,10 @@ module.exports = app => {
 
                 res.json(newOwner);
             })
+            .catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });
 
     });
 
@@ -40,9 +44,15 @@ module.exports = app => {
 
             where: { id: id }
         })
-            .then(owner => {
+            .then(app => {
 
-                res.json(owner);
+                res.json(app);
+                console.log("OWNER:::",app);
+                
+            })
+            .catch(error => {
+
+                res.status(412).json({ msg: error.message })
             });
     });
 
@@ -75,6 +85,10 @@ module.exports = app => {
             .then(deletedOwner => {
 
                 res.json(deletedOwner);
+            })
+            .catch(error => {
+
+                res.status(412).json({ msg: error.message })
             });
     });
 
