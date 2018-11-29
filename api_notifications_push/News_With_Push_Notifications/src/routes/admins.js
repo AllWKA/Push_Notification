@@ -1,7 +1,6 @@
 
 module.exports = app => {
     const Admins = app.db.models.admins;
-    const App = app.db.models.app;
 
     app.get('/admins', (req, res) => {
 
@@ -30,6 +29,28 @@ module.exports = app => {
 
         Admins.find({
             include: [{
+
+                model: app.db.models.app,
+                attributes: ['id', 'name']
+            }],
+
+            where: { id: id }
+        })
+            .then(admin => {
+
+                res.json(admin);
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });;
+    });
+
+    app.get('/appsFromAdmin/:id', (req, res) => {
+
+        const id = req.params.id;
+
+        Admins.find({
+            include: [{
                 model: app.db.models.app,
                 attributes: ['id', 'name']
 
@@ -37,11 +58,8 @@ module.exports = app => {
             where: { id: id }
         })
             .then(admin => {
-                res.json(admin);
 
-
-
-
+                admin.getApps().then(apps => {res.json(apps);});
             }).catch(error => {
 
                 res.status(412).json({ msg: error.message })
@@ -69,9 +87,10 @@ module.exports = app => {
 
     });
 
+
     app.put("/addAppToAdmin/:id", (req, res, next) => {
 
-        const apps = req.body.apps;
+        const App = req.body.App;
         const id = req.params.id;
 
         Admins.find({
@@ -87,23 +106,25 @@ module.exports = app => {
         })
             .then(admin => {
 
-                Object.keys(apps).forEach(key => {
+                // Object.keys(apps).forEach(key => {
 
-                    App.find({
+                //     App.find({
 
-                        where: { id: apps[key].id }
-                    })
-                        .then(app => {
+                //         where: { id: apps[key].id }
+                //     })
+                //         .then(app => {
 
-                            admin.addApp(app)
+                //             admin.addApp(app)
 
-                        });
-                }).catch(error => {
+                //         });
+                // })
 
-                    res.status(412).json({ msg: error.message })
-                });
+                admin.addApp(App);
                 res.json(admin);
-            })
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });
     });
 
     app.put("/admin/:id", (req, res, next) => {
@@ -126,89 +147,6 @@ module.exports = app => {
                 res.json(rowsUpdated);
             })
             .catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });
-    });
-
-    app.put("/deleteAppFromAdmin/:id", (req, res, next) => {
-
-        //const apps = req.body.apps;
-        const id = req.params.id;
-        const updateApps = req.body.apps;
-
-        Admins.find({
-
-            include: [{
-
-                model: app.db.models.app,
-                attributes: ['id', 'name']
-
-            }],
-
-            where: { id: id }
-        })
-            .then(admin => {
-
-
-                const oldApps = admin.apps;
-
-
-                //admin.setApps([]);
-
-                const newApps = [];
-                console.log("-->",newApps);
-
-
-                /*Object.keys(apps).forEach(key => {
-
-                    App.find({
-
-                        where: { id: apps[key].id }
-                    })
-                        .then(app => {
-
-                            admin.addApp(app);
-                            
-                        });
-                });*/
-
-                Object.keys(oldApps).forEach(key => {
-
-                    var oldId = oldApps[key].id;
-                    var valid = true;
-                    Object.keys(updateApps).forEach(key => {
-                        
-                        if (oldId == updateApps[key].id) {
-                            console.log("invalid id:", updateApps[key].id);
-
-                            valid = false;
-                        }
-
-                    });
-                    if (valid == true) {
-                        console.log("valid id:",oldId);
-                        
-                        App.find({
-
-                            where: { id: oldId }
-                        })
-                            .then(app => {
-
-                                newApps.push(app);
-                            });
-                        
-                    }
-
-                    console.log("--.-->",newApps[0]);
-                    
-
-
-
-                });
-
-                res.json(admin);
-            }).catch(error => {
 
                 res.status(412).json({ msg: error.message })
             });
