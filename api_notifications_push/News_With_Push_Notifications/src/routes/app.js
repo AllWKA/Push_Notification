@@ -1,35 +1,95 @@
 module.exports = app => {
 
-    const App = app.db.models.app;
+    const Apps = app.db.models.app;
 
+    app.get('/appsAndUsers', (req, res) => {
 
+        Apps.findAll({
+            include: [{ model: app.db.models.user }]
+        })
+            .then(result => res.json(result))
+            .catch(error => { res.status(412).json({ msg: error.message }); });
+
+    });
 
     app.get('/apps', (req, res) => {
 
-        App.findAll({
-            include: [{
-                model: app.db.models.user
-            }]
+        Apps.findAll({
+            include: [{ model: app.db.models.productowners }]
         })
             .then(result => res.json(result))
-            .catch(error => {
+            .catch(error => { res.status(412).json({ msg: error.message }); });
+
+    });
+
+    app.get('/appsAndOwners', (req, res) => {
+
+        Apps.findAll({
+            include: [{ model: app.db.models.productowners }]
+        })
+            .then(result => res.json(result))
+            .catch(error => { res.status(412).json({ msg: error.message }); });
+
+    });
+
+    app.get('/usersFromApp/:id', (req, res) => {
+
+        const id = req.params.id;
+
+        Apps.find({
+            include: [{
+                model: app.db.models.user,
+                attributes: ['id', 'name']
+
+            }],
+            where: { id: id }
+        })
+            .then(app => {
+
+                app.getUsers().then(users => { res.json(users); });
+            }).catch(error => {
 
                 res.status(412).json({ msg: error.message })
-            });
+            });;
+    });
 
+    app.get('/ownerFromApp/:id', (req, res) => {
+
+        const id = req.params.id;
+
+        Apps.find({
+            include: [{
+                model: app.db.models.productowners,
+                attributes: ['id', 'name']
+
+            }],
+            where: { id: id }
+        })
+            .then(app => {
+
+                app.getOwners().then(owner => { res.json(owner); });
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });;
     });
 
     app.post('/app', (req, res) => {
 
-        console.log(req.body.name);
         const name = req.body.name;
-        App.create({
+        const productOwnerId = req.body.productOwnerId;
+        console.log("AAA:",productOwnerId);
+        
+        Apps.create({
 
-            name: name
+            name: name,
+            productOwnerId: productOwnerId
         })
-            .then(newOwner => {
+            .then(app => {
 
-                res.json(newOwner);
+                
+                
+                res.json(app);
             })
             .catch(error => {
 
@@ -39,21 +99,19 @@ module.exports = app => {
     });
 
     app.get('/app/:id', (req, res) => {
+
         const id = req.params.id;
-        App.find({
+
+        Apps.find({
 
             where: { id: id }
         })
             .then(app => {
 
                 res.json(app);
-                console.log("OWNER:::",app);
-                
-            })
-            .catch(error => {
 
-                res.status(412).json({ msg: error.message })
-            });
+            })
+            .catch(error => { res.status(412).json({ msg: error.message }); });
     });
 
     app.put("/app/:id", (req, res, next) => {
@@ -61,35 +119,27 @@ module.exports = app => {
         const id = req.params.id;
         const name = req.body.name;
 
-        App.update({
+        Apps.update(
+            { name: name },
 
-            name: name
-        }, {
+            { where: { id: id } })
 
-                where: { id: id }
-            })
-            .then(function (rowsUpdated) {
+            .then(rowsUpdated => { res.json(rowsUpdated); })
 
-                res.json(rowsUpdated)
-            })
-            .catch(next)
+            .catch(next);
     });
 
     app.delete('/app/:id', (req, res) => {
 
         const id = req.params.id;
-        App.destroy({
 
-            where: { id: id }
-        })
-            .then(deletedOwner => {
+        Apps.destroy(
 
-                res.json(deletedOwner);
-            })
-            .catch(error => {
+            { where: { id: id } })
 
-                res.status(412).json({ msg: error.message })
-            });
+            .then(app => { res.json(app); })
+
+            .catch(error => { res.status(412).json({ msg: error.message }); });
     });
 
 }

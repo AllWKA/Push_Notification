@@ -10,6 +10,13 @@ module.exports = (sequelize,DataType) => {
                     notEmpty: true
                 }
             },
+            pwd: {
+                type: DataType.STRING,
+                allowNull: false,
+                validate:{
+                    notEmpty: true
+                }
+            },
             status:{
                 type: DataType.ENUM('active', 'inactive')
             },

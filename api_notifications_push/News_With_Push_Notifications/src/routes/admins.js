@@ -87,7 +87,7 @@ module.exports = app => {
 
     });
 
-
+    //TODO: test in ionic, here not works
     app.put("/addAppToAdmin/:id", (req, res, next) => {
 
         const App = req.body.App;
@@ -118,7 +118,6 @@ module.exports = app => {
 
                 //         });
                 // })
-
                 admin.addApp(App);
                 res.json(admin);
             }).catch(error => {
@@ -148,7 +147,7 @@ module.exports = app => {
             })
             .catch(error => {
 
-                res.status(412).json({ msg: error.message })
+                res.status(412).json({ msg: error.message });
             });
     });
 

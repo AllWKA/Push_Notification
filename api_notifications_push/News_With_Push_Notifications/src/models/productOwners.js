@@ -33,7 +33,7 @@ module.exports = (sequelize, DataType) => {
             }
         });
     Owner.associate = (models) => {
-        Owner.belongsToMany(models.app, {through: 'app_has_owners'});
+        Owner.hasMany(models.app);
     };
 
     return Owner;

@@ -2,8 +2,6 @@ module.exports = app => {
 
     const User = app.db.models.user;
 
-
-
     app.get('/users', (req, res) => {
 
         User.findAll({
@@ -25,18 +23,17 @@ module.exports = app => {
 
     app.post('/user', (req, res) => {
 
-        console.log(req.body.name);
-        console.log(req.body.email);
-
         const name = req.body.name;
         const email = req.body.email;
+        const pwd = req.body.pwd;
         const appId = req.body.appId;
 
         User.create({
 
             name: name,
             email: email,
-            appId: appId
+            appId: appId,
+            pwd : pwd
         })
             .then(newOwner => {
 

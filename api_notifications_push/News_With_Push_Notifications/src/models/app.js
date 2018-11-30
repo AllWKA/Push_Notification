@@ -22,6 +22,7 @@ module.exports = (sequelize,DataType) => {
     App.associate = (models) => {
         App.hasMany(models.user);
         App.belongsToMany(models.admins,{through: 'app_has_admins'});
+        App.belongsTo(models.productowners);
     };
 
     return App;
