@@ -30,26 +30,4 @@ sequelize
   .catch(err => {
     console.error('AAAAAAAH:', err);
   });
-
-
-//mostrar meny to many example:
-User.findAll({
-            include: [{
-
-                model: app.db.models.app,
-                as: 'userApps',
-                attributes: ['id', 'name'],
-                through: { attributes: ['userId','appId'] }
-            }]
-        })
-            .then(result => {
-
-                res.json(result);
-
-            })
-            .catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });
-
-    });
+>>>>>>> 14a2ce677ec2dd1b7bc08e16e1efb44145077367:Documentation/otra info importante.txt
