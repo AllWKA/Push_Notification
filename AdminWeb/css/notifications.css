@@ -68,3 +68,9 @@
     border: none;
     background-image: -moz-linear-gradient(to left,#0a4d6c,#048dc4,#0a4d6c);
 }
+
+.form-notifications {
+    width: 75%;
+    padding: 15px;
+    margin: auto;
+  }

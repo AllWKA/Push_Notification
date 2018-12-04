@@ -30,4 +30,3 @@ sequelize
   .catch(err => {
     console.error('AAAAAAAH:', err);
   });
->>>>>>> 14a2ce677ec2dd1b7bc08e16e1efb44145077367:Documentation/otra info importante.txt
