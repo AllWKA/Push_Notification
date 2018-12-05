@@ -5,19 +5,11 @@ module.exports = app => {
     app.get('/users', (req, res) => {
 
         User.findAll({
-            include: [{
-                model: app.db.models.app
-            }]
+            include: [{ model: app.db.models.app }]
         })
-            .then(result => {
+            .then(result => { res.json(result); })
 
-                res.json(result);
-
-            })
-            .catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });
+            .catch(error => { res.status(412).json({ msg: error.message }); });
 
     });
 
@@ -33,15 +25,11 @@ module.exports = app => {
             name: name,
             email: email,
             appId: appId,
-            pwd : pwd
+            pwd: pwd
         })
-            .then(newOwner => {
+            .then(user => { res.json(user); })
 
-                res.json(newOwner);
-            }).catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });
+            .catch(error => { res.status(412).json({ msg: error.message }); });
 
     });
 
@@ -49,14 +37,9 @@ module.exports = app => {
 
         const id = req.params.id;
 
-        User.find({
+        User.find({ where: { id: id } })
 
-            where: { id: id }
-        })
-            .then(owner => {
-
-                res.json(owner);
-            });
+            .then(owner => { res.json(owner); });
     });
 
     app.put("/user/:id", (req, res, next) => {
@@ -73,34 +56,23 @@ module.exports = app => {
             email: email,
             appId: appId,
             status: status
-        }, {
 
-                where: { id: id }
-            })
-            .then(rowsUpdated => {
+        }, { where: { id: id } })
 
-                res.json(rowsUpdated)
-            })
-            .catch(error => {
+            .then(rowsUpdated => { res.json(rowsUpdated); })
 
-                res.status(412).json({ msg: error.message })
-            });
+            .catch(error => { res.status(412).json({ msg: error.message }); });
     });
 
     app.delete('/user/:id', (req, res) => {
 
         const id = req.params.id;
-        User.destroy({
 
-            where: { id: id }
-        })
-            .then(deletedOwner => {
+        User.destroy({ where: { id: id } })
 
-                res.json(deletedOwner);
-            }).catch(error => {
+            .then(deletedOwner => { res.json(deletedOwner); })
 
-                res.status(412).json({ msg: error.message })
-            });
+            .catch(error => { res.status(412).json({ msg: error.message }); });
     });
 
 }
