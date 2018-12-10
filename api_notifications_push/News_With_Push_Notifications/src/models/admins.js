@@ -27,7 +27,6 @@ module.exports = (sequelize,DataType) => {
     );
 
     Admins.associate = (models) => {
-        //TODO: many to many a app
         Admins.belongsToMany(models.app, {through: 'app_has_admins'});
         
     };

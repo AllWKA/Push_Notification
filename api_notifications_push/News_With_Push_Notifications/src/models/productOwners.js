@@ -30,6 +30,12 @@ module.exports = (sequelize, DataType) => {
                 validate: {
                     notEmpty: true
                 }
+            },
+            createdAt:{
+                type: DataType.DATE
+            },
+            updatedAt:{
+                type: DataType.DATE
             }
         });
     Owner.associate = (models) => {
