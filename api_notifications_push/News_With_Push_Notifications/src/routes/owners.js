@@ -14,7 +14,6 @@ module.exports = app => {
             .then(result => {
                 
                 res.json(result);
-
             })
             .catch(error => {
 
@@ -90,7 +89,7 @@ module.exports = app => {
         })
             .then(owner => {
 
-                res.json(owners);
+                res.json(owner);
             })
             .catch(error => {
 
@@ -115,9 +114,9 @@ module.exports = app => {
 
             where: { id: id }
         })
-            .then(admin => {
+            .then(owner => {
                 
-                admin.addApp(App);
+                owner.addApp(App);
                 res.json(admin);
             }).catch(error => {
 

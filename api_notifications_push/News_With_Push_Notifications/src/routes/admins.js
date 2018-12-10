@@ -4,6 +4,8 @@ module.exports = app => {
 
     app.get('/admins', (req, res) => {
 
+        //TODO: cambiar todos los routes para que usen sus controladores.
+
         Admins.findAll({
 
             include: [{
@@ -42,7 +44,7 @@ module.exports = app => {
             }).catch(error => {
 
                 res.status(412).json({ msg: error.message })
-            });;
+            });
     });
 
     app.get('/appsFromAdmin/:id', (req, res) => {
@@ -59,7 +61,7 @@ module.exports = app => {
         })
             .then(admin => {
 
-                admin.getApps().then(apps => {res.json(apps);});
+                admin.getApps().then(apps => { res.json(apps); });
             }).catch(error => {
 
                 res.status(412).json({ msg: error.message })

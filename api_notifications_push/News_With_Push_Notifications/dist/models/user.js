@@ -1,25 +1,41 @@
 "use strict";
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize, DataType) {
   var User = sequelize.define('user', {
     name: {
-      type: Sequelize.STRING
+      type: DataType.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    pwd: {
+      type: DataType.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     },
     status: {
-      type: Sequelize.ENUM,
-      values: ['active', 'inactive']
+      type: DataType.ENUM('active', 'inactive')
     },
     email: {
-      type: Sequelize.STRING
+      type: DataType.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    createdAt: {
+      type: DataType.DATE
+    },
+    updatedAt: {
+      type: DataType.DATE
     }
   });
 
   User.associate = function (models) {
-    //associations can be define here
-    User.hasMany(models.Messege, {
-      foreignKey: 'id_messege',
-      as: 'messeges'
-    });
+    User.belongsTo(models.app);
   };
 
   return User;

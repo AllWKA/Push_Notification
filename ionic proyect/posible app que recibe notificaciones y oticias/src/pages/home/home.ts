@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { NewsPage } from '../news/news';
+import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
   selector: 'page-home',
@@ -9,10 +10,9 @@ import { NewsPage } from '../news/news';
 })
 export class HomePage {
 
-  user = "";
+  user;
   pwd = "";
-
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, private rest: RestProvider) {
 
   }
 
@@ -20,7 +20,18 @@ export class HomePage {
 
     //TODO: verificar
     console.log("Entro Normal");
-
+    
+    this.rest.getAdmins().subscribe(
+      admins => {
+        this.user = admins;
+        console.log("yey yupi yey",this.user);
+      },
+      err => console.log("me cago en chanquete y su barco",err)
+      
+      
+    );
+      
+      
     if (this.checkForm() == true) {
 
       this.changePage(0);
