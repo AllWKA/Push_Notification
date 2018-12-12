@@ -1,4 +1,10 @@
+var bcrypt = require('bcryptjs');
+// bcrypt.genSalt(10, (err, salt) => {
 
+//     bcrypt.hash(admin.pwd, salt, function (err, hash) {
+//         // BASE
+//     });
+// });
 module.exports = app => {
     const Admins = app.db.models.admins;
 
@@ -15,6 +21,7 @@ module.exports = app => {
             }]
         })
             .then(result => {
+
                 res.json(result);
 
             })
@@ -69,23 +76,29 @@ module.exports = app => {
     });
 
     app.post('/admin', (req, res) => {
+        bcrypt.genSalt(10, (err, salt) => {
 
-        const user = req.body.user;
-        const pwd = req.body.pwd;
+            bcrypt.hash(req.body.pwd, salt, function (err, hash) {
+                const user = req.body.user;
+                const pwd = hash;
+                Admins.create({
 
-        Admins.create({
+                    user: user,
+                    pwd: pwd,
+                })
+                    .then(newAdmin => {
+                        console.log(newAdmin);
 
-            user: user,
-            pwd: pwd,
-        })
-            .then(newAdmin => {
-                res.json(newAdmin);
+                        res.json(newAdmin);
 
 
-            }).catch(error => {
+                    }).catch(error => {
 
-                res.status(412).json({ msg: error.message })
+                        res.status(412).json({ msg: error.message })
+                    });
             });
+
+        });
 
     });
 
@@ -108,18 +121,6 @@ module.exports = app => {
         })
             .then(admin => {
 
-                // Object.keys(apps).forEach(key => {
-
-                //     App.find({
-
-                //         where: { id: apps[key].id }
-                //     })
-                //         .then(app => {
-
-                //             admin.addApp(app)
-
-                //         });
-                // })
                 admin.addApp(App);
                 res.json(admin);
             }).catch(error => {
@@ -129,28 +130,36 @@ module.exports = app => {
     });
 
     app.put("/admin/:id", (req, res, next) => {
-
-        const id = req.params.id;
-        const user = req.body.user;
-        const pwd = req.body.pwd;
+        bcrypt.genSalt(10, (err, salt) => {
 
 
-        Admins.update({
 
-            user: user,
-            pwd: pwd
-        }, {
+            bcrypt.hash(req.body.pwd, salt, function (err, hash) {
 
-                where: { id: id }
-            })
-            .then(rowsUpdated => {
+                const id = req.params.id;
+                const user = req.body.user;
+                const pwd = hash;
 
-                res.json(rowsUpdated);
-            })
-            .catch(error => {
+                Admins.update({
 
-                res.status(412).json({ msg: error.message });
+                    user: user,
+                    pwd: pwd
+                }, {
+
+                        where: { id: id }
+                    })
+                    .then(rowsUpdated => {
+
+                        res.json(rowsUpdated);
+                    })
+                    .catch(error => {
+
+                        res.status(412).json({ msg: error.message });
+                    });
             });
+        });
+
+
     });
 
     app.delete('/admin/:id', (req, res) => {

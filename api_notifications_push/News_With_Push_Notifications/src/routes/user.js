@@ -1,3 +1,10 @@
+var bcrypt = require('bcryptjs');
+// bcrypt.genSalt(10, (err, salt) => {
+
+//     bcrypt.hash(admin.pwd, salt,(err, hash) => {
+//         // BASE
+//     });
+// });
 module.exports = app => {
 
     const User = app.db.models.user;
@@ -14,22 +21,27 @@ module.exports = app => {
     });
 
     app.post('/user', (req, res) => {
+        bcrypt.genSalt(10, (err, salt) => {
 
-        const name = req.body.name;
-        const email = req.body.email;
-        const pwd = req.body.pwd;
-        const appId = req.body.appId;
+            bcrypt.hash(req.body.pwd, salt, (err, hash) =>{
+                const name = req.body.name;
+                const email = req.body.email;
+                const pwd = hash;
+                const appId = req.body.appId;
 
-        User.create({
+                User.create({
 
-            name: name,
-            email: email,
-            appId: appId,
-            pwd: pwd
-        })
-            .then(user => { res.json(user); })
+                    name: name,
+                    email: email,
+                    appId: appId,
+                    pwd: pwd
+                })
+                    .then(user => { res.json(user); })
 
-            .catch(error => { res.status(412).json({ msg: error.message }); });
+                    .catch(error => { res.status(412).json({ msg: error.message }); });
+            });
+        });
+
 
     });
 
@@ -43,25 +55,33 @@ module.exports = app => {
     });
 
     app.put("/user/:id", (req, res, next) => {
+        bcrypt.genSalt(10, (err, salt) => {
 
-        const id = req.params.id;
-        const name = req.body.name;
-        const email = req.body.email;
-        const status = req.body.status;
-        const appId = req.body.appId;
+            bcrypt.hash(req.body.pwd, salt, (err, hash) => {
 
-        User.update({
+                const id = req.params.id;
+                const name = req.body.name;
+                const email = req.body.email;
+                const pwd = hash;
+                const status = req.body.status;
+                const appId = req.body.appId;
 
-            name: name,
-            email: email,
-            appId: appId,
-            status: status
+                User.update({
 
-        }, { where: { id: id } })
+                    name: name,
+                    email: email,
+                    appId: appId,
+                    status: status,
+                    pwd:pwd
 
-            .then(rowsUpdated => { res.json(rowsUpdated); })
+                }, { where: { id: id } })
 
-            .catch(error => { res.status(412).json({ msg: error.message }); });
+                    .then(rowsUpdated => { res.json(rowsUpdated); })
+
+                    .catch(error => { res.status(412).json({ msg: error.message }); });
+            });
+        });
+
     });
 
     app.delete('/user/:id', (req, res) => {

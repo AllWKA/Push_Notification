@@ -10,7 +10,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #015f85;
+  background-color: #000000;
 }
 
 .fixed-color {
@@ -19,12 +19,12 @@ body {
 
 .from-shadow {
 
-  box-shadow: 10px 10px 5px #282726;
+  box-shadow: 5px 5px 5px #ffffff;
 
 }
 
 .form-background {
-  background-color: #0a4d6c;
+  background-color: #3b4246;
   text-align: center;
 }
 .btnSubmit{
