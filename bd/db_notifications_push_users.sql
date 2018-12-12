@@ -16,29 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `apps`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `apps`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `apps` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
+  `appId` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `pwd` varchar(45) NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'inactive',
+  `email` varchar(255) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_users_idx` (`appId`),
+  CONSTRAINT `fk_users` FOREIGN KEY (`appId`) REFERENCES `apps` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `apps`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `apps` WRITE;
-/*!40000 ALTER TABLE `apps` DISABLE KEYS */;
-INSERT INTO `apps` VALUES (1,'app actualizada',NULL,'2018-11-15'),(4,'app1',NULL,NULL),(5,'app2',NULL,NULL);
-/*!40000 ALTER TABLE `apps` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 20:34:25
+-- Dump completed on 2018-12-12 20:12:42

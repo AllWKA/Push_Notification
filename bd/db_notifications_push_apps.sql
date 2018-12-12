@@ -16,34 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `apps`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `apps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `users` (
+CREATE TABLE `apps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `appId` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `status` enum('active','inactive') NOT NULL DEFAULT 'inactive',
-  `email` varchar(255) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `productOwnerId` int(11) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_users_idx` (`appId`),
-  CONSTRAINT `fk_users` FOREIGN KEY (`appId`) REFERENCES `apps` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_app_idx` (`productOwnerId`),
+  CONSTRAINT `fk_app` FOREIGN KEY (`productOwnerId`) REFERENCES `productowners` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `apps`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'bryan','active','bryan@gmail.com',NULL,NULL),(3,1,'jose','active','jose@gmail.com',NULL,NULL),(4,1,'bryanJaramillo','active','bryan@gmail.com','2018-11-23','2018-11-23');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `apps` WRITE;
+/*!40000 ALTER TABLE `apps` DISABLE KEYS */;
+/*!40000 ALTER TABLE `apps` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 20:34:24
+-- Dump completed on 2018-12-12 20:12:42
