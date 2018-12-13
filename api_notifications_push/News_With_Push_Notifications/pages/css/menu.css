@@ -1,5 +1,5 @@
-.body{
-    background-color: black;    
+body{
+    background-color: rgb(4, 17, 53);    
 }
 a{
     color: rgb(0, 0, 0);
@@ -17,7 +17,7 @@ a:hover{
 
 .fixedCard{
     text-align: center;
-    background-color: #ffffff   ;
+    background-color: #4269beb0   ;
     text-align: center;
     margin: 30px 10px 30px;
     max-height: 300px;
