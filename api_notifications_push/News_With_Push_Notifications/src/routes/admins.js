@@ -32,10 +32,36 @@ module.exports = app => {
 
     });
 
-    app.get('/admin/:id', (req, res) => {
+    // app.get('/admin/:id', (req, res) => {
 
-        const id = req.params.id;
+    //     const id = req.params.id;
 
+    //     Admins.find({
+    //         include: [{
+
+    //             model: app.db.models.app,
+    //             attributes: ['id', 'name']
+    //         }],
+
+    //         where: { id: id }
+    //     })
+    //         .then(admin => {
+
+    //             res.json(admin);
+    //         }).catch(error => {
+
+    //             res.status(412).json({ msg: error.message })
+    //         });
+    // });
+
+    app.get('/logAdmin/:user/:pwd', (req, res) => {
+
+        const user = req.params.user;
+        const pwd = req.params.pwd;
+        const nextRes = res;
+        console.log(pwd);
+        
+        
         Admins.find({
             include: [{
 
@@ -43,7 +69,40 @@ module.exports = app => {
                 attributes: ['id', 'name']
             }],
 
-            where: { id: id }
+            where: { user: user }
+        })
+            .then(admin => {
+
+                var l = admin;
+                bcrypt.compare(pwd, admin.pwd, function(err, res) {
+                    
+                    if (res) {
+                        nextRes.json(admin);
+                    }else{
+                        nextRes.json(err);
+                    }
+                });
+                
+                 
+
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });
+    });
+
+    app.get('/admin/:user', (req, res) => {
+
+        const user = req.params.user;
+        
+        Admins.find({
+            include: [{
+
+                model: app.db.models.app,
+                attributes: ['id', 'name']
+            }],
+
+            where: { user: user }
         })
             .then(admin => {
 
