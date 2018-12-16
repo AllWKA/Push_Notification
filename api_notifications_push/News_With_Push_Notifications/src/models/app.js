@@ -8,7 +8,8 @@ module.exports = (sequelize,DataType) => {
                 allowNull: false,
                 validate:{
                     notEmpty: true
-                }
+                },
+                unique: true
             },
             createdAt:{
                 type: DataType.DATE

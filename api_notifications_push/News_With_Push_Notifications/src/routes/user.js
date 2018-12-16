@@ -21,9 +21,10 @@ module.exports = app => {
     });
 
     app.post('/user', (req, res) => {
+
         bcrypt.genSalt(10, (err, salt) => {
 
-            bcrypt.hash(req.body.pwd, salt, (err, hash) =>{
+            bcrypt.hash(req.body.pwd, salt, (err, hash) => {
                 const name = req.body.name;
                 const email = req.body.email;
                 const pwd = hash;
@@ -72,7 +73,7 @@ module.exports = app => {
                     email: email,
                     appId: appId,
                     status: status,
-                    pwd:pwd
+                    pwd: pwd
 
                 }, { where: { id: id } })
 
