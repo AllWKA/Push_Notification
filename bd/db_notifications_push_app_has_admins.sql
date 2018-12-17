@@ -23,15 +23,14 @@ DROP TABLE IF EXISTS `app_has_admins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `app_has_admins` (
-  `appId` int(11) NOT NULL,
   `adminId` int(11) NOT NULL,
+  `appId` int(11) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
-  PRIMARY KEY (`appId`,`adminId`),
-  KEY `fk2_app_has_admin_idx` (`adminId`),
-  KEY `fk1_app_has_admin_idx` (`appId`),
-  CONSTRAINT `fk1_app_has_admin` FOREIGN KEY (`appId`) REFERENCES `apps` (`id`),
-  CONSTRAINT `fk2_app_has_admin` FOREIGN KEY (`adminId`) REFERENCES `admins` (`id`)
+  PRIMARY KEY (`adminId`,`appId`),
+  KEY `fk2_app_admins_idx` (`appId`),
+  CONSTRAINT `fk1_app_admins` FOREIGN KEY (`adminId`) REFERENCES `admins` (`id`),
+  CONSTRAINT `fk2_app_admins` FOREIGN KEY (`appId`) REFERENCES `apps` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -41,7 +40,7 @@ CREATE TABLE `app_has_admins` (
 
 LOCK TABLES `app_has_admins` WRITE;
 /*!40000 ALTER TABLE `app_has_admins` DISABLE KEYS */;
-INSERT INTO `app_has_admins` VALUES (1,1,NULL,NULL);
+INSERT INTO `app_has_admins` VALUES (23,5,NULL,NULL),(23,6,NULL,NULL);
 /*!40000 ALTER TABLE `app_has_admins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 19:03:14
+-- Dump completed on 2018-12-17 15:26:22

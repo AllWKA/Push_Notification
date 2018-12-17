@@ -3,35 +3,37 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpClientModule } from '@angular/common/http';
 
-
+import {NewsPage} from '../pages/news/news';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import {NotificationsPage} from '../pages/notifications/notifications';
+import { HttpClientModule } from '@angular/common/http';
+import { RestProvider } from '../providers/rest/rest';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    NotificationsPage
+    NewsPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    NotificationsPage
+    NewsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    HttpClientModule,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    RestProvider
   ]
 })
 export class AppModule {}

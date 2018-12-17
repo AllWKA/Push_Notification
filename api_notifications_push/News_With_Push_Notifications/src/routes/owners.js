@@ -2,7 +2,7 @@ module.exports = app => {
     const Owners = app.db.models.productowners;
 
     app.get('/owners', (req, res) => {
-        
+
         Owners.findAll({
 
             include: [{
@@ -12,23 +12,22 @@ module.exports = app => {
             }]
         })
             .then(result => {
-                
-                res.json(result);
 
+                res.json(result);
             })
             .catch(error => {
 
                 res.status(412).json({ msg: error.message })
             });
-            
+
 
     });
 
     app.get('/owner/:name', (req, res) => {
 
         const name = req.params.name;
-        
-        
+
+
         Owners.find({
             where: { name: name },
             include: [{
@@ -38,22 +37,22 @@ module.exports = app => {
             }]
         })
             .then(result => {
-                
+
                 res.json(result);
             })
             .catch(error => {
 
                 res.status(412).json({ msg: error.message })
             });
-            
+
 
     });
 
-    app.get('/owner/:id', (req, res) => {
+    app.get('/ownerbyId/:id', (req, res) => {
 
         const id = req.params.id;
-        
-        
+
+
         Owners.find({
             where: { id: id },
             include: [{
@@ -62,15 +61,9 @@ module.exports = app => {
 
             }]
         })
-            .then(result => {
-                
-                res.json(result);
-            })
-            .catch(error => {
+            .then(result => { res.json(result); })
+            .catch(error => { res.status(412).json({ msg: error.message }) });
 
-                res.status(412).json({ msg: error.message })
-            });
-            
 
     });
 
@@ -88,14 +81,28 @@ module.exports = app => {
             surname2: surname2,
             postCode: postCode
         })
-            .then(owner => {
+            .then(owner => { res.json(owner); })
+            .catch(error => { res.status(412).json({ msg: error.message }) });
 
-                res.json(owners);
-            })
-            .catch(error => {
+    });
 
-                res.status(412).json({ msg: error.message })
-            });
+    app.put('/owner/:id', (req, res) => {
+
+        const id = req.params.id;
+        const name = req.body.name;
+        const surname1 = req.body.surname1;
+        const surname2 = req.body.surname2;
+        const postCode = req.body.postCode;
+
+        Owners.create({
+
+            name: name,
+            surname1: surname1,
+            surname2: surname2,
+            postCode: postCode
+        })
+            .then(owner => { res.json(owner); })
+            .catch(error => { res.status(412).json({ msg: error.message }) });
 
     });
 
@@ -115,16 +122,14 @@ module.exports = app => {
 
             where: { id: id }
         })
-            .then(admin => {
-                
-                admin.addApp(App);
-                res.json(admin);
-            }).catch(error => {
+            .then(owner => {
 
-                res.status(412).json({ msg: error.message })
-            });
+                owner.addApp(App);
+                res.json(admin);
+            })
+            .catch(error => { res.status(412).json({ msg: error.message }) });
     });
-    
+
     app.delete('/owner/:id', (req, res) => {
 
         const id = req.params.id;
@@ -132,9 +137,7 @@ module.exports = app => {
         Owners.destroy(
 
             { where: { id: id } })
-
             .then(owner => { res.json(owner); })
-
             .catch(error => { res.status(412).json({ msg: error.message }); });
     });
 };

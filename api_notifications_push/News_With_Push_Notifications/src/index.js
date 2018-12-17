@@ -2,11 +2,10 @@ var babel = require("@babel/core");
 
 import express from 'express';
 import consign from 'consign';
-import bodyParser from 'body-parser';
 
 const app = express();
 
-app.use(bodyParser.json());
+
 
 
 consign({

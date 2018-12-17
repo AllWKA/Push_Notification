@@ -25,11 +25,14 @@ DROP TABLE IF EXISTS `productowners`;
 CREATE TABLE `productowners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `surname1` varchar(255) NOT NULL,
-  `surname2` varchar(255) NOT NULL,
+  `surname1` varchar(255) DEFAULT NULL,
+  `surname2` varchar(255) DEFAULT NULL,
   `postCode` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `createdAt` date DEFAULT NULL,
+  `updatedAt` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +41,7 @@ CREATE TABLE `productowners` (
 
 LOCK TABLES `productowners` WRITE;
 /*!40000 ALTER TABLE `productowners` DISABLE KEYS */;
+INSERT INTO `productowners` VALUES (4,'inventia plus','a@a.com','asd',4,'2018-12-10','2018-12-10');
 /*!40000 ALTER TABLE `productowners` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 19:03:13
+-- Dump completed on 2018-12-17 15:26:22

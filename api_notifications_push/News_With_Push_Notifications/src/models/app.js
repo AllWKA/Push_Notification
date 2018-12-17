@@ -8,7 +8,8 @@ module.exports = (sequelize,DataType) => {
                 allowNull: false,
                 validate:{
                     notEmpty: true
-                }
+                },
+                unique: true
             },
             createdAt:{
                 type: DataType.DATE
@@ -22,7 +23,7 @@ module.exports = (sequelize,DataType) => {
     App.associate = (models) => {
         App.hasMany(models.user);
         App.belongsToMany(models.admins,{through: 'app_has_admins'});
-        App.belongsTo(models.productowners);
+        App.belongsTo(models.productowners, {foreignKey: 'productOwnerId'});
     };
 
     return App;

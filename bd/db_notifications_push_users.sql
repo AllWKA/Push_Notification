@@ -26,14 +26,15 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `appId` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `pwd` varchar(100) NOT NULL,
   `status` enum('active','inactive') NOT NULL DEFAULT 'inactive',
   `email` varchar(255) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_users_idx` (`appId`),
-  CONSTRAINT `fk_users` FOREIGN KEY (`appId`) REFERENCES `apps` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_users` FOREIGN KEY (`appId`) REFERENCES `apps` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +43,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (6,5,'pepe1','$2a$10$bKmOgL0j3ZrS5LZ8sDd25eWcqCZjpPB8PCq6NoFO9M9RNv/xH5iFO','inactive','a@a.com',NULL,'2018-12-17'),(8,5,'a','a','inactive','a',NULL,NULL),(9,5,'bryan','$2a$10$6CBWiANoIi0IoYbkt2eLfOegt19tH2xCe9k0wIujUUsCLnys2Xd7y','inactive','bryan@gmail.com','2018-12-17','2018-12-17'),(10,6,'park1','$2a$10$ldwMDJV/hx9aSbNlGtSPHOlcfH6mdzJPzM8x5a2RBKlK35JqT8ZWK','inactive','b@b.com','2018-12-17','2018-12-17');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 19:03:13
+-- Dump completed on 2018-12-17 15:26:22

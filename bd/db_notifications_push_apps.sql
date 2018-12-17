@@ -25,10 +25,13 @@ DROP TABLE IF EXISTS `apps`;
 CREATE TABLE `apps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
+  `productOwnerId` int(11) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  KEY `fk_app_idx` (`productOwnerId`),
+  CONSTRAINT `fk_app` FOREIGN KEY (`productOwnerId`) REFERENCES `productowners` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +40,7 @@ CREATE TABLE `apps` (
 
 LOCK TABLES `apps` WRITE;
 /*!40000 ALTER TABLE `apps` DISABLE KEYS */;
-INSERT INTO `apps` VALUES (1,'app actualizada',NULL,'2018-11-15'),(3,'bryan','2018-11-15','2018-11-15');
+INSERT INTO `apps` VALUES (5,'woDa',4,NULL,NULL),(6,'Lpark',4,NULL,NULL);
 /*!40000 ALTER TABLE `apps` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 19:03:13
+-- Dump completed on 2018-12-17 15:26:21

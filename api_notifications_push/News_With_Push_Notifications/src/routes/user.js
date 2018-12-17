@@ -1,3 +1,5 @@
+var bcrypt = require('bcryptjs');
+
 module.exports = app => {
 
     const User = app.db.models.user;
@@ -5,43 +7,37 @@ module.exports = app => {
     app.get('/users', (req, res) => {
 
         User.findAll({
-            include: [{
-                model: app.db.models.app
-            }]
+            include: [{ model: app.db.models.app }]
         })
-            .then(result => {
+            .then(result => { res.json(result); })
 
-                res.json(result);
-
-            })
-            .catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });
+            .catch(error => { res.status(412).json({ msg: error.message }); });
 
     });
 
     app.post('/user', (req, res) => {
 
-        const name = req.body.name;
-        const email = req.body.email;
-        const pwd = req.body.pwd;
-        const appId = req.body.appId;
+        bcrypt.genSalt(10, (err, salt) => {
 
-        User.create({
+            bcrypt.hash(req.body.pwd, salt, (err, hash) => {
+                const name = req.body.name;
+                const email = req.body.email;
+                const pwd = hash;
+                const appId = req.body.appId;
 
-            name: name,
-            email: email,
-            appId: appId,
-            pwd : pwd
-        })
-            .then(newOwner => {
+                User.create({
 
-                res.json(newOwner);
-            }).catch(error => {
+                    name: name,
+                    email: email,
+                    appId: appId,
+                    pwd: pwd
+                })
+                    .then(user => { res.json(user); })
 
-                res.status(412).json({ msg: error.message })
+                    .catch(error => { res.status(412).json({ msg: error.message }); });
             });
+        });
+
 
     });
 
@@ -49,58 +45,81 @@ module.exports = app => {
 
         const id = req.params.id;
 
+        User.find({ where: { id: id } })
+
+            .then(owner => { res.json(owner); });
+    });
+
+    app.get('/logUser/:name/:pwd', (req, res) => {
+
+        const name = req.params.name;
+        const pwd = req.params.pwd;
+        const nextRes = res;
+
         User.find({
+            include: [{
 
-            where: { id: id }
+                model: app.db.models.app,
+                attributes: ['id', 'name']
+            }],
+
+            where: {name: name}
         })
-            .then(owner => {
+            .then(user => {
+                bcrypt.compare(pwd, user.pwd,(err, res) => {
 
-                res.json(owner);
+                    if (res) {
+                        nextRes.json(user);
+                    } else {
+                        nextRes.json(err);
+                    }
+                });
+
+
+
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
             });
     });
 
     app.put("/user/:id", (req, res, next) => {
+        bcrypt.genSalt(10, (err, salt) => {
 
-        const id = req.params.id;
-        const name = req.body.name;
-        const email = req.body.email;
-        const status = req.body.status;
-        const appId = req.body.appId;
+            bcrypt.hash(req.body.pwd, salt, (err, hash) => {
 
-        User.update({
+                const id = req.params.id;
+                const name = req.body.name;
+                const email = req.body.email;
+                const pwd = hash;
+                const status = req.body.status;
 
-            name: name,
-            email: email,
-            appId: appId,
-            status: status
-        }, {
+                User.update({
 
-                where: { id: id }
-            })
-            .then(rowsUpdated => {
+                    name: name,
+                    email: email,
+                    status: status,
+                    pwd: pwd
 
-                res.json(rowsUpdated)
-            })
-            .catch(error => {
+                }, { where: { id: id } })
 
-                res.status(412).json({ msg: error.message })
+                    .then(rowsUpdated => { res.json(rowsUpdated); })
+
+                    .catch(error => { res.status(412).json({ msg: error.message }); });
             });
+        });
+
     });
 
     app.delete('/user/:id', (req, res) => {
 
         const id = req.params.id;
-        User.destroy({
 
-            where: { id: id }
-        })
-            .then(deletedOwner => {
+        User.destroy({ where: { id: id } })
 
-                res.json(deletedOwner);
-            }).catch(error => {
+            .then(deletedOwner => { res.json(deletedOwner); })
 
-                res.status(412).json({ msg: error.message })
-            });
+            .catch(error => { res.status(412).json({ msg: error.message }); });
     });
 
 }

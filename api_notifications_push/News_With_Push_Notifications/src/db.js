@@ -34,7 +34,7 @@ module.exports = app => {
             const model = sequelize.import(modelDir);
             db.models[model.name] = model;
         });
-        console.log("////////////////>All Models charged:", db.models);
+        console.log("All Models charged:", db.models);
 
         Object.keys(db.models).forEach(key =>{
             console.log("****************assosiating: ", db.models[key].name);
