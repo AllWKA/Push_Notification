@@ -65,13 +65,11 @@ module.exports = app => {
                 const email = req.body.email;
                 const pwd = hash;
                 const status = req.body.status;
-                const appId = req.body.appId;
 
                 User.update({
 
                     name: name,
                     email: email,
-                    appId: appId,
                     status: status,
                     pwd: pwd
 

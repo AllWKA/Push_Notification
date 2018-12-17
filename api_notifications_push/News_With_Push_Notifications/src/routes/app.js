@@ -45,7 +45,7 @@ module.exports = app => {
             where: { id: id }
         })
             .then(app => {
-
+                
                 app.getUsers().then(users => { res.json(users); });
             }).catch(error => {
 

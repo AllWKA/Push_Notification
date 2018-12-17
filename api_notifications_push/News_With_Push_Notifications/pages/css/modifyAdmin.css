@@ -12,14 +12,8 @@ li:focus {
     text-align: center;
     max-height: 80%;
 }
-select{
-    margin-top: 1%;
-    margin-bottom: 5%;
-    color: black;
-    background-color: rgb(158, 158, 158);
-    text-align: center;
-}
 li{color:black;}
+
 .fixed-ul {
     margin-bottom: 90px;
     text-align: left;
@@ -27,7 +21,7 @@ li{color:black;}
     max-height: 300px;
     min-height: 100px;
     width: 100%;
-    margin: 0;
+    margin: 10px 20px;
     padding: 0;
     
     border: 2px solid #ccc;

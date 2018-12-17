@@ -19,5 +19,8 @@ module.exports = app => {
    app.get('/modifyUser', (req, res) => {
       res.render(path.join(__dirname, '../../pages/layouts/modifyUser.hbs'));
    });
+   app.get('/modifyAdmin', (req, res) => {
+      res.render(path.join(__dirname, '../../pages/layouts/modifyAdmin.hbs'));
+   });
 
 };

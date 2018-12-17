@@ -179,13 +179,9 @@ module.exports = app => {
             where: { id: id }
         })
             .then(admin => {
-
                 admin.addApp(App);
                 res.json(admin);
-            }).catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });
+            }).catch(error => {res.status(412).json({ msg: error.message })});
     });
 
     app.put("/admin/:id", (req, res, next) => {
@@ -212,7 +208,8 @@ module.exports = app => {
                         res.json(rowsUpdated);
                     })
                     .catch(error => {
-
+                        console.log("--->",error);
+                        
                         res.status(412).json({ msg: error.message });
                     });
             });
