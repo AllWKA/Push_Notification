@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { NotificationsPage } from '../notifications/notifications';
-import { HttpClientModule } from '@angular/common/http';
+import { NewsPage } from '../news/news';
+import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
   selector: 'page-home',
@@ -10,10 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class HomePage {
 
-  user = "";
+  user="";
   pwd = "";
-
-  constructor(private http: HttpClientModule, public navCtrl: NavController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, private rest: RestProvider) {
 
   }
 
@@ -21,12 +20,22 @@ export class HomePage {
 
     //TODO: verificar
     console.log("Entro Normal");
-    //console.log(this.http.get());
-
-
+    
+    
+    
+      
+      
     if (this.checkForm() == true) {
+      this.rest.getUser(this.user,this.pwd).subscribe(
+        user => {
+          this.changePage(0);
+        },
+        err => console.log("me cago en chanquete y su barco",err)
+        
+        
+      );
+      
 
-      this.changePage(0);
     }
 
   }
@@ -34,7 +43,6 @@ export class HomePage {
   logFacebook() {
 
     console.log("Entro con FaceBook");
-
   }
 
   logGoogle() {
@@ -47,7 +55,7 @@ export class HomePage {
     console.log("Cambio Página: ", url);
     switch (url) {
       case 0:
-        this.navCtrl.push(NotificationsPage);
+        this.navCtrl.push(NewsPage);
         break;
       case 1:
         console.log("entré en create");
@@ -58,30 +66,10 @@ export class HomePage {
 
   singUp() {
     //TODO: news or create New
-    //'http://localhost:3000/admins'
-    console.log("asdasdasd");
-
-    this.http.get('http://localhost:3000/admins')
-      .then(data => {
-
-        console.log(data.status);
-        console.log(data.data); // data received by server
-        console.log(data.headers);
-
-      })
-      .catch(error => {
-
-        console.log(error.status);
-        console.log(error.error);
-        console.log(error.headers);
-
-      });
-    //this.changePage(1);
+    this.changePage(1);
   }
 
   checkForm() {
-
-    console.log("user: ", this.user, " pwd: ", this.pwd);
 
     if (this.user.length != 0 && this.pwd.length != 0) {
 
