@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map, catchError } from 'rxjs/operators';
-import { Admin } from '../../models/admin';
+import { User } from '../../models/user';
 /*
   Generated class for the RestProvider provider.
 
@@ -13,19 +13,20 @@ import { Admin } from '../../models/admin';
 export class RestProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello RestProvider Provider');
   }
 
   private baseUrl = 'http://localhost:3000';
 
-  public getAdmins(): Observable<Admin> {
-    return this.http.get(this.baseUrl + '/admins').pipe(
+  public getUser(name:string,pwd:string): Observable<User> {
+    
+    return this.http.get(this.baseUrl + '/logUser/' + name + "/" + pwd).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );
   }
 
   private extractData(res: Response) {
+    
     let body = res;
     return body || { };
   }

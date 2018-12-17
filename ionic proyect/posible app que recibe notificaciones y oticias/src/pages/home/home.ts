@@ -10,7 +10,7 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class HomePage {
 
-  user;
+  user="";
   pwd = "";
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, private rest: RestProvider) {
 
@@ -21,20 +21,21 @@ export class HomePage {
     //TODO: verificar
     console.log("Entro Normal");
     
-    this.rest.getAdmins().subscribe(
-      admins => {
-        this.user = admins;
-        console.log("yey yupi yey",this.user);
-      },
-      err => console.log("me cago en chanquete y su barco",err)
-      
-      
-    );
+    
+    
       
       
     if (this.checkForm() == true) {
+      this.rest.getUser(this.user,this.pwd).subscribe(
+        user => {
+          this.changePage(0);
+        },
+        err => console.log("me cago en chanquete y su barco",err)
+        
+        
+      );
+      
 
-      this.changePage(0);
     }
 
   }
@@ -69,8 +70,6 @@ export class HomePage {
   }
 
   checkForm() {
-
-    console.log("user: ", this.user, " pwd: ", this.pwd);
 
     if (this.user.length != 0 && this.pwd.length != 0) {
 

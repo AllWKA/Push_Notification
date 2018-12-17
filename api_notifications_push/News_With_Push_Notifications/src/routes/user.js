@@ -55,6 +55,42 @@ module.exports = app => {
             .then(owner => { res.json(owner); });
     });
 
+    app.get('/logUser/:name/:pwd', (req, res) => {
+
+        const name = req.params.name;
+        const pwd = req.params.pwd;
+        const nextRes = res;
+
+        console.log(pwd);
+
+
+        User.find({
+            include: [{
+
+                model: app.db.models.app,
+                attributes: ['id', 'name']
+            }],
+
+            where: {name: name}
+        })
+            .then(user => {
+                bcrypt.compare(pwd, user.pwd,(err, res) => {
+
+                    if (res) {
+                        nextRes.json(user);
+                    } else {
+                        nextRes.json(err);
+                    }
+                });
+
+
+
+            }).catch(error => {
+
+                res.status(412).json({ msg: error.message })
+            });
+    });
+
     app.put("/user/:id", (req, res, next) => {
         bcrypt.genSalt(10, (err, salt) => {
 

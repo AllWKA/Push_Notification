@@ -32,7 +32,7 @@ module.exports = function (app) {
       db.models[model.name] = model;
     });
 
-    console.log("////////////////>All Models charged:", db.models);
+    console.log("All Models charged:", db.models);
     Object.keys(db.models).forEach(function (key) {
       console.log("****************assosiating: ", db.models[key].name);
       db.models[key].associate(db.models);
