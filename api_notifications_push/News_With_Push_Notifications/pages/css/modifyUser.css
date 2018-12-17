@@ -1,9 +1,8 @@
 body{
-    background-color: rgb(0, 0, 0);
-    
+    background-color: rgb(4, 17, 53); 
 }
 li:focus {
-    background: lightgreen;
+    background: rgb(0, 0, 0);
   }
 
 .bg-cool{
@@ -19,7 +18,9 @@ select{
     background-color: rgb(158, 158, 158);
     text-align: center;
 }
-li{color:black;}
+li{
+    color:rgb(2, 197, 28);
+}
 .fixed-ul {
     margin-bottom: 90px;
     text-align: left;
@@ -29,7 +30,7 @@ li{color:black;}
     width: 100%;
     margin: 0;
     padding: 0;
-    
+    background-color: #074494af;
     border: 2px solid #ccc;
     
     font-size: 20px;
@@ -51,4 +52,10 @@ button{
 form{
     background-color: white;
 }
+
+.fixed-form{
+    background-color: #074494af;
+    color: white;
+}
+
   

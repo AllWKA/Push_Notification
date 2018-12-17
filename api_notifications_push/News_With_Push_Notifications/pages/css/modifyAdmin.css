@@ -3,7 +3,7 @@ body{
     
 }
 li:focus {
-    background: lightgreen;
+    background: rgb(0, 0, 0);
   }
 
 .bg-cool{
@@ -12,7 +12,7 @@ li:focus {
     text-align: center;
     max-height: 80%;
 }
-li{color:black;}
+li{color:rgb(6, 163, 19);}
 
 .fixed-ul {
     margin-bottom: 90px;
@@ -44,5 +44,10 @@ button{
 }
 form{
     background-color: white;
+}
+
+.fixed-form{
+    background-color: #074494af;
+    color: white;
 }
   

@@ -16,23 +16,23 @@
             <a class="nav-link" href="./createUser">Create User</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Modify User</a>
+            <a class="nav-link" href="./modifyUser">Modify User</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Create Admin</a>
+            <a class="nav-link" href="./createAdmin">Create Admin</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Modify Admin</a>
+            <a class="nav-link" href="./modifyAdmin">Modify Admin</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Notification</a>
+            <a class="nav-link" href="">Notification</a>
         </li>
     </ul>
 </nav>
 
 <div class="container">
     <div class="row">
-        <select class="form-control" id="apps" onchange="showUsers()">
+        <select class="form-control fixed-form" id="apps" onchange="showUsers()">
 
         </select>
     </div>
@@ -48,28 +48,28 @@
 
     </div>
     <div class="row">
-        <div class="card container">
+        <div class="card container fixed-form">
             <div class="card-header">
                 <h4 class="mb-0">User Information</h4>
             </div>
-            <div class="card-body">
-                <form class="form" role="form" autocomplete="off" id="userForm">
+            <div class="card-body fixed-form">
+                <form class="form fixed-form" role="form" autocomplete="off" id="userForm">
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Name</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="text" name="nameUser">
+                            <input class="form-control fixed-form" type="text" name="nameUser">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Password</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="password" name="pwdUser">
+                            <input class="form-control fixed-form" type="password" name="pwdUser">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label form-control-label">Email</label>
                         <div class="col-lg-9">
-                            <input class="form-control" type="email" name="emailUser">
+                            <input class="form-control fixed-form" type="email" name="emailUser">
                         </div>
                     </div>
                     <div class="form-group row">

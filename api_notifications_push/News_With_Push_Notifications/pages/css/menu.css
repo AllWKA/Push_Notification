@@ -12,12 +12,12 @@ a:link {
 }
 
 a:hover{
-    color: rgb(39, 86, 218);
+    color: rgb(251, 252, 255);
 }
 
 .fixedCard{
     text-align: center;
-    background-color: #4269beb0   ;
+    background-color: #074494af;
     text-align: center;
     margin: 30px 10px 30px;
     max-height: 300px;

@@ -4,5 +4,10 @@
     margin-right: auto;
 }
 body{
-    background-color: black;    
+    background-color: rgb(4, 17, 53);    
+}
+
+.fixed-form{
+    background-color: #074494af;
+    color: white;
 }
