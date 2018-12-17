@@ -10,15 +10,9 @@ function postAdmin(event) {
     admin.user = form.elements.namedItem("user").value;
     admin.pwd = form.elements.namedItem("pwd").value;
 
-    console.log(JSON.stringify(admin));
-
-
     var xhr = new XMLHttpRequest(),
         method = "POST",
         url = "http://localhost:3000/admin";
-
-    
-
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

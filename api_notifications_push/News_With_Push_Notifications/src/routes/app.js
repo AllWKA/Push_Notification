@@ -44,13 +44,8 @@ module.exports = app => {
             }],
             where: { id: id }
         })
-            .then(app => {
-                
-                app.getUsers().then(users => { res.json(users); });
-            }).catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });;
+            .then(app => {app.getUsers().then(users => { res.json(users); });})
+            .catch(error => {res.status(412).json({ msg: error.message })});;
     });
 
     app.get('/ownerFromApp/:id', (req, res) => {
@@ -65,36 +60,22 @@ module.exports = app => {
             }],
             where: { id: id }
         })
-            .then(app => {
-
-                app.getOwners().then(owner => { res.json(owner); });
-            }).catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });;
+            .then(app => { res.json(app.dataValues.productowner); })
+            .catch(error => { res.status(412).json({ msg: error.message }) });
     });
 
     app.post('/app', (req, res) => {
 
         const name = req.body.name;
         const productOwnerId = req.body.productOwnerId;
-        console.log("AAA:",productOwnerId);
         
         Apps.create({
 
             name: name,
             productOwnerId: productOwnerId
         })
-            .then(app => {
-
-                
-                
-                res.json(app);
-            })
-            .catch(error => {
-
-                res.status(412).json({ msg: error.message })
-            });
+            .then(app => {res.json(app);})
+            .catch(error => {res.status(412).json({ msg: error.message })});
 
     });
 
@@ -106,11 +87,7 @@ module.exports = app => {
 
             where: { id: id }
         })
-            .then(app => {
-
-                res.json(app);
-
-            })
+            .then(app => {res.json(app);})
             .catch(error => { res.status(412).json({ msg: error.message }); });
     });
 

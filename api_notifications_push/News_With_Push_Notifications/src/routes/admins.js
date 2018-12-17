@@ -1,10 +1,4 @@
 var bcrypt = require('bcryptjs');
-// bcrypt.genSalt(10, (err, salt) => {
-
-//     bcrypt.hash(admin.pwd, salt, function (err, hash) {
-//         // BASE
-//     });
-// });
 module.exports = app => {
     const Admins = app.db.models.admins;
 
@@ -31,28 +25,6 @@ module.exports = app => {
             });
 
     });
-
-    // app.get('/admin/:id', (req, res) => {
-
-    //     const id = req.params.id;
-
-    //     Admins.find({
-    //         include: [{
-
-    //             model: app.db.models.app,
-    //             attributes: ['id', 'name']
-    //         }],
-
-    //         where: { id: id }
-    //     })
-    //         .then(admin => {
-
-    //             res.json(admin);
-    //         }).catch(error => {
-
-    //             res.status(412).json({ msg: error.message })
-    //         });
-    // });
 
     app.get('/logAdmin/:user/:pwd', (req, res) => {
 

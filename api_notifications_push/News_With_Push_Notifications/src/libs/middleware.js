@@ -8,6 +8,7 @@ module.exports = app => {
 
     app.use(express.static(path.join(__dirname, '../../pages')));
     app.use(express.static(path.join(__dirname, '../../pages/Ts')));
+    
     app.use(bodyParser.json());
     app.use(cors());
 

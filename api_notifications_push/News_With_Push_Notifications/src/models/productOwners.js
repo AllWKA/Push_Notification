@@ -5,31 +5,19 @@ module.exports = (sequelize, DataType) => {
         {
             name: {
                 type: DataType.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: true
-                }
+                allowNull: false
             },
             surname1: {
                 type: DataType.STRING,
-                allowNull: true,
-                validate: {
-                    notEmpty: true
-                }
+                allowNull: true
             },
             surname2: {
                 type: DataType.STRING,
-                allowNull: true,
-                validate: {
-                    notEmpty: true
-                }
+                allowNull: true
             },
             postCode: {
                 type: DataType.INTEGER,
-                allowNull: false,
-                validate: {
-                    notEmpty: true
-                }
+                allowNull: false
             },
             createdAt:{
                 type: DataType.DATE

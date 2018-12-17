@@ -1,10 +1,5 @@
 var bcrypt = require('bcryptjs');
-// bcrypt.genSalt(10, (err, salt) => {
 
-//     bcrypt.hash(admin.pwd, salt,(err, hash) => {
-//         // BASE
-//     });
-// });
 module.exports = app => {
 
     const User = app.db.models.user;
@@ -60,9 +55,6 @@ module.exports = app => {
         const name = req.params.name;
         const pwd = req.params.pwd;
         const nextRes = res;
-
-        console.log(pwd);
-
 
         User.find({
             include: [{
