@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(45) NOT NULL,
-  `pwd` varchar(45) NOT NULL,
+  `pwd` varchar(100) NOT NULL,
   `createdAt` date DEFAULT NULL,
   `updatedAt` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'bryanpppp','Admin123',NULL,'2018-11-28'),(2,'root','Admin123',NULL,NULL),(3,'bryan de la rosa montoya','Admin123','2018-11-26','2018-11-28'),(4,'anacleto','Admin123','2018-11-28','2018-11-28'),(5,'amparo','Admin123','2018-11-28','2018-11-28'),(6,'amparo','Admin123','2018-11-28','2018-11-28'),(7,'amparo','Admin123','2018-11-28','2018-11-28'),(8,'amparo','Admin123','2018-11-28','2018-11-28'),(9,'amparo','Admin123','2018-11-28','2018-11-28'),(10,'amparo','Admin123','2018-11-28','2018-11-28'),(11,'amparo','Admin123','2018-11-28','2018-11-28'),(12,'amparo','Admin123','2018-11-28','2018-11-28'),(13,'amparo','Admin123','2018-11-28','2018-11-28'),(14,'amparo','Admin123','2018-11-28','2018-11-28'),(15,'amparo','Admin123','2018-11-28','2018-11-28'),(16,'amparo','Admin123','2018-11-28','2018-11-28'),(20,'amparo','Admin123','2018-11-28','2018-11-28');
+INSERT INTO `admins` VALUES (22,'pepe','admin123',NULL,NULL),(23,'root','$2a$10$lrBA8985ECxqoEcitIgjVeSPiLfD5EMuC80nbMgLcPPs.cGNv4F5C','2018-12-17','2018-12-17');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-12 20:12:42
+-- Dump completed on 2018-12-17 15:26:22
