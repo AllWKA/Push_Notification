@@ -1,8 +1,7 @@
 {
-  "name": "Push_Notifications_News",
+  "name": "NewsWithPushNotification",
   "integrations": {
     "cordova": {}
   },
   "type": "ionic-angular"
-  
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { NewsPage } from '../news/news';
+import { NewsPage } from "../news/news";
 import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
@@ -10,8 +10,10 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class HomePage {
 
-  user="";
+  user = "";
   pwd = "";
+  error= "noerror";
+
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, private rest: RestProvider) {
 
   }
@@ -20,21 +22,19 @@ export class HomePage {
 
     //TODO: verificar
     console.log("Entro Normal");
-    
-    
-    
-      
-      
+
+
     if (this.checkForm() == true) {
-      this.rest.getUser(this.user,this.pwd).subscribe(
+      this.rest.getUser(this.user, this.pwd).subscribe(
         user => {
           this.changePage(0);
         },
-        err => console.log("me cago en chanquete y su barco",err)
-        
-        
+        err => this.error = err
+
+
       );
-      
+      // this.changePage(0);
+
 
     }
 
@@ -66,7 +66,7 @@ export class HomePage {
 
   singUp() {
     //TODO: news or create New
-    this.changePage(1);
+    //this.changePage(1);
   }
 
   checkForm() {
