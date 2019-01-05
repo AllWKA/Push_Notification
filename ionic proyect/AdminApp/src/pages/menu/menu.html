@@ -1,0 +1,51 @@
+<ion-header class="header center bg3">
+  <!-- <ion-navbar color ="primary">
+    
+  </ion-navbar> -->
+  <p class="fixed-title">
+    <ion-icon name="ios-leaf-outline" class="toolbarText">Menu</ion-icon>
+  </p>
+</ion-header>
+
+
+<ion-content padding class="bg1">
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button color="light" class="menu-buttons" (click)="changePage(0)">
+          <ion-icon name="person-add"> Create <br> Admin</ion-icon>
+
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button color="light" class="menu-buttons" (click)="changePage(1)">
+          <ion-icon name="person-add"> Modify <br> Admin</ion-icon>
+
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button color="light" class="menu-buttons" (click)="changePage(2)">
+          <ion-icon name="contacts"> Create <br> User</ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button color="light" class="menu-buttons" (click)="changePage(3)">
+          <ion-icon name="contacts"> Modify <br> User</ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="light" class="menu-buttons" (click)="changePage(4)">
+          <ion-icon name="notifications-outline"> Send <br> Notification</ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

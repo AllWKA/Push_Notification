@@ -15,6 +15,7 @@ consign({
 .then('db.js')
 .then('libs/middleware.js')
 .then('routes')
+.then('libs/socketIo.js')
 .then('libs/boot.js')
 .into(app);
 

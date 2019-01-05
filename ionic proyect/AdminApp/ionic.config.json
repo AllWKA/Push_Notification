@@ -1,0 +1,7 @@
+{
+  "name": "AdminApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

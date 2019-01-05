@@ -1,0 +1,54 @@
+page-home {
+    
+}
+
+ion-col{
+    text-align: center;
+}
+
+.bg1{
+    background-color: #0a4d6c;
+}
+
+.bg2{
+    background-color: #346B84;
+    border-radius: 7px 7px 7px 7px;
+}
+
+.bg3{
+    background-color: #052939;
+}
+
+
+
+ion-input{
+    color: rgb(255, 255, 255);
+    text-align: center; 
+}
+
+.fixedButton{
+    background-color: #1184B8; 
+}
+
+ion-icon{
+    // font-family:  'Rouge Script', cursive;
+    color: black;
+
+}
+.fixed-title{
+    font-family:  'Rouge Script', cursive;
+    font-size: 1.3em;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    font-style:normal;
+    padding-top: 0.1em;
+    text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+}
+ion-icon{
+    color: white;
+    font-style:normal;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}

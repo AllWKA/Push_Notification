@@ -22,5 +22,8 @@ module.exports = app => {
    app.get('/modifyAdmin', (req, res) => {
       res.render(path.join(__dirname, '../../pages/layouts/modifyAdmin.hbs'));
    });
+   app.get('/notifications', (req, res) => {
+      res.render(path.join(__dirname, '../../pages/layouts/notifications.hbs'));
+   });
 
 };

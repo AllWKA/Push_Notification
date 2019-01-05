@@ -1,5 +1,7 @@
 var bcrypt = require('bcryptjs');
+
 module.exports = app => {
+
     const Admins = app.db.models.admins;
 
     app.get('/admins', (req, res) => {
@@ -31,8 +33,6 @@ module.exports = app => {
         const user = req.params.user;
         const pwd = req.params.pwd;
         const nextRes = res;
-        console.log(pwd);
-        
         
         Admins.find({
             include: [{

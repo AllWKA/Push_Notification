@@ -15,7 +15,7 @@ export class RestProvider {
   constructor(public http: HttpClient) {
   }
 
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'http://192.168.0.174:3000';
 
   public getUser(name:string,pwd:string): Observable<User> {
     
