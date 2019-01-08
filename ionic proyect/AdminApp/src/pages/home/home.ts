@@ -1,35 +1,48 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MenuPage } from "../menu/menu";
+import { AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { adminStatic } from "../../staticVariables/admin";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  users = "No users";
-  constructor(public navCtrl: NavController, private rest: RestProvider) {
+  
+  users;
+  user = "";
+  pwd = "";
+
+  constructor(public navCtrl: NavController, 
+              private rest: RestProvider, private alertCtrl: AlertController) {
 
   }
 
   log() {
 
-    var name = "pruebaDeAppCambiada";
-    var email = "a@a.com";
-    var pwd = "123";
-    var appId = 6;
+    if (this.user == "" || this.pwd == "") {
 
-    this.rest.getAdmins().subscribe(
+      let alert = this.alertCtrl.create({
+        title: 'Empty field',
+        subTitle: 'User or Password is empty.'
+      });
 
-      admins => {
+      alert.present();
 
-        console.log(admins);
-        this.users = JSON.stringify(admins);
-      }
-    );
+    } else {
 
-    // this.navCtrl.push(MenuPage);
+      this.rest.logAdmin(this.user, this.pwd).subscribe(
+
+        admin => { 
+
+          adminStatic.id = admin.id;
+          this.navCtrl.push(MenuPage); 
+        }
+      );
+    }
+
   }
 
 }

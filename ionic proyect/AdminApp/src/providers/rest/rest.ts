@@ -8,17 +8,55 @@ import { Admin } from "../../models/admin";
 @Injectable()
 export class RestProvider {
 
+
+
   constructor(public http: HttpClient) {
   }
 
-  private baseUrl = 'http://192.168.0.174:3000';
+  private baseUrl = 'http://192.168.0.29:3000';
+
+  public getAppsFromAdmin(id: String) {
+
+    return this.http.get(this.baseUrl + '/appsFromAdmin/' + id).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  public createAdmin(user: string, pwd: string): Observable<Admin> {
+
+    var newAdmin = {
+      user: user,
+      pwd: pwd
+    }
+
+    return this.http.post<Admin>(this.baseUrl + '/admin', newAdmin).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   public getAdmins(): Observable<Admin> {
 
-    return this.http.get(this.baseUrl+'/admins').pipe(
-          map(this.extractData),
-          catchError(this.handleError)
-        );
+    console.log("consiguiendo admins");
+    
+
+    return this.http.get(this.baseUrl + '/admins').pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  public logAdmin(user: string, pwd: string) {
+
+    console.log(this.baseUrl + '/logAdmin/' + user + "/" + pwd);
+
+
+    return this.http.get(this.baseUrl + '/logAdmin/' + user + "/" + pwd).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+
+
   }
 
 
@@ -49,7 +87,7 @@ export class RestProvider {
 
   }
 
-  public postUser(name: string, email: string, pwd: string, appId: number): Observable<User> {
+  public createUser(name: string, email: string, pwd: string, appId: number): Observable<User> {
 
     var newUser = {
       name: name,

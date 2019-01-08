@@ -1,19 +1,13 @@
-<!--
-  Generated template for the CreateAdminPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
+<ion-header class="header bg3">
   <ion-navbar>
-    <ion-title>createAdmin</ion-title>
+    <p class="fixed-title">
+      <ion-icon name="ios-leaf-outline" class="toolbarText">Create Admin</ion-icon>
+    </p>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="bg1">
   <ion-grid>
     <ion-list>
 
@@ -27,25 +21,9 @@
 
     </ion-list>
 
-    <button ion-button class="fixedButton" (click)="log()">
-      <p>Log In</p>
+    <button ion-button class="fixedButton" (click)="create()">
+      <p>Create</p>
     </button>
-    <!-- <button ion-button class="facebookButton form" (click) ="logFacebook()">
-      <p>Log In With<br>
-        <ion-icon name="logo-facebook"></ion-icon>
-      </p>
-    </button>
-
-    <button ion-button class="googleButton form" (click) ="logGoogle()">
-      <p>Log In With<br>
-        <ion-icon name="logo-google"></ion-icon>
-      </p>
-    </button> -->
-    <button ion-button class="fixedButton" (click)="singUp()">
-      <p>Sing In</p>
-    </button>
-
-    <!-- <p>{{error}}</p> -->
 
   </ion-grid>
 </ion-content>
