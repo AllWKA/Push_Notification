@@ -13,11 +13,34 @@ export class RestProvider {
   constructor(public http: HttpClient) {
   }
 
-  private baseUrl = 'http://192.168.0.29:3000';
+  private baseUrl = 'http://192.168.201.160:3000';
+
+  public delAdmin(id: number){
+
+    return this.http.delete(this.baseUrl + '/admin/' + id).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+
+  }
+
+  public putAdmin(id: number, user: string, pwd: string) {
+
+    var admin = {
+      user:user,
+      pwd:pwd
+    }
+    // console.log(admin);
+    
+    return this.http.put<User>(this.baseUrl + '/admin/' + id, admin).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   public getAppsFromAdmin(id: String) {
 
     return this.http.get(this.baseUrl + '/appsFromAdmin/' + id).pipe(
+
       map(this.extractData),
       catchError(this.handleError)
     );
@@ -31,16 +54,15 @@ export class RestProvider {
     }
 
     return this.http.post<Admin>(this.baseUrl + '/admin', newAdmin).pipe(
+
       catchError(this.handleError)
     );
   }
 
   public getAdmins(): Observable<Admin> {
 
-    console.log("consiguiendo admins");
-    
-
     return this.http.get(this.baseUrl + '/admins').pipe(
+
       map(this.extractData),
       catchError(this.handleError)
     );
@@ -48,10 +70,8 @@ export class RestProvider {
 
   public logAdmin(user: string, pwd: string) {
 
-    console.log(this.baseUrl + '/logAdmin/' + user + "/" + pwd);
-
-
     return this.http.get(this.baseUrl + '/logAdmin/' + user + "/" + pwd).pipe(
+
       map(this.extractData),
       catchError(this.handleError)
     );

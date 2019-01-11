@@ -1,7 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { adminStatic } from "../../staticVariables/admin";
 import { RestProvider } from "../../providers/rest/rest";
+import { ModalController } from 'ionic-angular';
+import { AdminformPage } from "../adminform/adminform";
 
 @Component({
   selector: 'page-modify-admin',
@@ -10,9 +12,10 @@ import { RestProvider } from "../../providers/rest/rest";
 export class ModifyAdminPage {
 
   apps = [];
-  admins = [];
+  admins: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public rest: RestProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public rest: RestProvider,
+              public modalCtrl: ModalController) {
 
   }
 
@@ -22,22 +25,24 @@ export class ModifyAdminPage {
     this.rest.getAdmins().subscribe(
       admins => {
         
-        var result = admins;
-
-        for (let i = 0; i < admins.length; i++) {
-          this.admins[i] = admins[i].user;
-          
-        }
-
+        this.admins = admins;
       }
     );
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModifyAdminPage');
+    
     this.chargeApps();
     this.chargeAdmins();
+  }
+  
+
+  itemSelected(admin){
+    
+    const modal = this.modalCtrl.create(AdminformPage,{admin:admin});
+    modal.present();
+    
   }
 
   chargeApps() {

@@ -32,7 +32,8 @@ export class HomePage {
       alert.present();
 
     } else {
-
+      console.log("asdasd: ",this.user,this.pwd);
+      
       this.rest.logAdmin(this.user, this.pwd).subscribe(
 
         admin => { 

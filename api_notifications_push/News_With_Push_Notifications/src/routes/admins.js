@@ -33,7 +33,7 @@ module.exports = app => {
         const user = req.params.user;
         const pwd = req.params.pwd;
         const nextRes = res;
-        
+
         Admins.find({
             include: [{
 
@@ -46,16 +46,16 @@ module.exports = app => {
             .then(admin => {
 
                 var l = admin;
-                bcrypt.compare(pwd, admin.pwd, function(err, res) {
-                    
+                bcrypt.compare(pwd, admin.pwd, function (err, res) {
+
                     if (res) {
                         nextRes.json(admin);
-                    }else{
+                    } else {
                         nextRes.json(err);
                     }
                 });
-                
-                 
+
+
 
             }).catch(error => {
 
@@ -66,7 +66,7 @@ module.exports = app => {
     app.get('/admin/:user', (req, res) => {
 
         const user = req.params.user;
-        
+
         Admins.find({
             include: [{
 
@@ -107,26 +107,21 @@ module.exports = app => {
     });
 
     app.post('/admin', (req, res) => {
+
         bcrypt.genSalt(10, (err, salt) => {
 
             bcrypt.hash(req.body.pwd, salt, function (err, hash) {
+
                 const user = req.body.user;
                 const pwd = hash;
+                
                 Admins.create({
 
                     user: user,
                     pwd: pwd,
                 })
-                    .then(newAdmin => {
-                        console.log(newAdmin);
-
-                        res.json(newAdmin);
-
-
-                    }).catch(error => {
-
-                        res.status(412).json({ msg: error.message })
-                    });
+                    .then(newAdmin => { res.json(newAdmin); })
+                    .catch(error => { res.status(412).json({ msg: error.message }) });
             });
 
         });
@@ -153,7 +148,7 @@ module.exports = app => {
             .then(admin => {
                 admin.addApp(App);
                 res.json(admin);
-            }).catch(error => {res.status(412).json({ msg: error.message })});
+            }).catch(error => { res.status(412).json({ msg: error.message }) });
     });
 
     app.put("/admin/:id", (req, res, next) => {
@@ -180,8 +175,8 @@ module.exports = app => {
                         res.json(rowsUpdated);
                     })
                     .catch(error => {
-                        console.log("--->",error);
-                        
+                        console.log("--->", error);
+
                         res.status(412).json({ msg: error.message });
                     });
             });

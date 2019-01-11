@@ -6,23 +6,20 @@
   </ion-navbar>
 </ion-header>
 
-
-
 <ion-content padding class="bg1">
 
   <ion-grid>
-    <ion-item class="select-bg">
+    <!-- <ion-item class="select-bg">
       <ion-select id="select" [(ngModel)]='apps' okText="Okay!" aria-placeholder="Apps" interface="popover">
         <ion-option *ngFor="let app of apps" [value]="app">{{app.name}}</ion-option>
       </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-list>
-        <button ion-item *ngFor="let admin of admins" (click)="itemSelected(item)">
-          {{ admin }}
-        </button>
-      </ion-list>
-
-    </ion-item>
-  </ion-grid> 
+    </ion-item> -->
+    <button ion-item *ngFor="let admin of admins" (click)="itemSelected(admin)" class="buttons-admin">
+      <ion-icon name="person-add"> <br>
+        User: {{ admin.user }} <br> 
+        Created At: {{ admin.createdAt }} <br>
+        Updated At: {{ admin.updatedAt }}
+      </ion-icon>
+    </button>
+  </ion-grid>
 </ion-content>

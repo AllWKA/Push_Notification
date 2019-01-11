@@ -4,11 +4,9 @@ import path from 'path';
 import express from 'express';
 import cors from 'cors';
 
-
 module.exports = app => {
 
     app.use(express.static(path.join(__dirname, '../../pages')));
-    // app.use(express.static(path.join(__dirname, '../../pages/Ts')));
     app.use(express.static(path.join(__dirname, '../../node_modules/socket.io-client')));
     
     app.use(bodyParser.json());

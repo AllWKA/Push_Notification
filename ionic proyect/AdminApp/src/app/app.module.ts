@@ -12,6 +12,7 @@ import { CreateUserPage } from "../pages/create-user/create-user";
 import { ModifyAdminPage } from "../pages/modify-admin/modify-admin";
 import { ModifyUserPage } from "../pages/modify-user/modify-user";
 import { SendNotificationPage } from "../pages/send-notification/send-notification";
+import { AdminformPage } from "../pages/adminform/adminform";
 
 import { RestProvider } from '../providers/rest/rest';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     MenuPage,
+    AdminformPage,
     CreateAdminPage,
     CreateUserPage,
     ModifyAdminPage,
@@ -37,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     MenuPage,
+    AdminformPage,
     CreateAdminPage,
     CreateUserPage,
     ModifyAdminPage,

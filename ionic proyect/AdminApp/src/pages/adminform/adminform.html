@@ -1,0 +1,41 @@
+<ion-header class="header bg3">
+  <ion-navbar>
+    <p class="fixed-title">
+      <ion-icon name="ios-leaf-outline" class="toolbarText">Modify {{user}}</ion-icon>
+    </p>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bg1">
+  <ion-grid>
+    <ion-list>
+
+      <ion-item class="form bg2">
+        <ion-input type="text" placeholder="Username" [(ngModel)]="user">{{user}}</ion-input>
+      </ion-item>
+
+      <ion-item class="form bg2">
+        <ion-input type="password" placeholder="Password" [(ngModel)]="pwd">{{pwd}}</ion-input>
+      </ion-item>
+
+      <h1 class="title-admin-form">Apps</h1>
+
+      <p class="app" *ngFor="let app of apps" class="app">
+        {{app.name}}
+      </p>
+
+    </ion-list>
+
+    <button ion-button class="fixedButton" (click)="create()">
+      <p>Modify</p>
+    </button>
+    <button ion-button class="fixedButton" (click)="delete()">
+      <p>Delete</p>
+    </button>
+    <button ion-button class="fixedButton" (click)="cancel()">
+      <p>Cancel</p>
+    </button>
+
+  </ion-grid>
+</ion-content>

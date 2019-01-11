@@ -23,7 +23,6 @@ export class CreateAdminPage {
   create() {
 
     if (this.user != "" || this.pwd != "") {
-      console.log("hola1");
       
       this.rest.createAdmin(this.user, this.pwd).subscribe(
 
